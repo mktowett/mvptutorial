@@ -1,8 +1,10 @@
-package com.mktowett.majiapp;
+package com.mktowett.majiapp.core.core.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.mktowett.majiapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
