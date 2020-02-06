@@ -1,19 +1,21 @@
 package com.mktowett.majiapp.model;
 
-public class ClientModel {
+public class TenantModel {
     String firstname;
     String surname;
     String phone;
     String meterreading;
     String userID;
+    String meterNumber;
 
 
-    public ClientModel(String userID,String firstname, String surname, String phone, String meterreading) {
+    public TenantModel(String userID, String firstname, String surname, String phone, String meterreading,String meternumber) {
         this.firstname = firstname;
         this.surname = surname;
         this.phone = phone;
         this.meterreading = meterreading;
         this.userID = userID;
+        this.meterNumber = meternumber;
     }
 
 
@@ -57,4 +59,11 @@ public class ClientModel {
         this.meterreading = meterreading;
     }
 
+    public String getMeterNumber() {
+        return meterNumber;
+    }
+
+    public void setMeterNumber(String meterNumber) {
+        this.meterNumber = meterNumber;
+    }
 }

@@ -7,12 +7,13 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
     @FormUrlEncoded
-    @POST("majimaji/login.php")
+    @POST("login.php")
     Call<String> loginApp(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("majimaji/meters.php")
+    @POST("meters.php")
     Call<String> recordMeter(@Field("u_id")String clientID,
                              @Field("c_id")String clerkID,
-                             @Field("reading")String meterReading);
+                             @Field("reading")String meterReading,
+                             @Field("adminId")String adminId);
 }

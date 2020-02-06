@@ -1,6 +1,4 @@
-package com.mktowett.majiapp.core.core.login;
-
-import android.util.Log;
+package com.mktowett.majiapp.core.core.dashboard;
 
 import com.mktowett.majiapp.model.TenantModel;
 import com.mktowett.majiapp.network.ApiClientString;
@@ -19,40 +17,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//implement Presenter
-public class LoginPreseneterImpl implements LoginActivityContract.LoginPresenter {
-    //declare loginview
-    private LoginActivityContract.LoginMainView loginMainView;
-    //contructor
-    public LoginPreseneterImpl(LoginActivityContract.LoginMainView loginMainView){
-        this.loginMainView = loginMainView;
+public class MainActivityPresenterImpl implements MainActivityContract.Presenter {
+    //declare mainView
+    MainActivityContract.MainActivityView mainActivityView;
+
+    //create constructor
+    public MainActivityPresenterImpl(MainActivityContract.MainActivityView mainActivityView) {
+        this.mainActivityView = mainActivityView;
+
     }
 
-    //auto-gen method from Presenter
     @Override
-    public void onInvokeLogin(String username, String password, Sessions sessions) {
-
-       loginMainView.showProgress();
-       //make api call to server
+    public void onSubmitForm(String id, String userId, String meterReading, String adminId, Sessions sessions) {
+        mainActivityView.showProgress();
         ApiInterface apiInterface = ApiClientString.getClient().create(ApiInterface.class);
-        Call<String> call = apiInterface.loginApp(username, password);
-        Log.d("Resp: ", call.toString());
-        //handle response
+        Call<String> call = apiInterface.recordMeter(id,userId,meterReading,adminId);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                loginMainView.dismissProgress();
-                try {
+                mainActivityView.dismissProgress();
+                try{
                     JSONObject obj = new JSONObject(response.body());
                     String respcode = obj.optString(Constants.KEY_RESPCODE);
                     String respdesc = obj.optString(Constants.KEY_RESPDESC);
 
                     if (respcode.equals("00")){
-                        Log.d("dataResponse","res"+response.body());
-                        sessions.setUserId(obj.optJSONObject("user_data").optString("USER_ID"));
-                        sessions.setAdminId(obj.optJSONObject("user_data").optString("USER_CREATED_BY"));
-
-                        //get and set tenants
+                        sessions.clearData(Constants.KEY_TENANTS);
                         List<TenantModel> tenantModelList = new ArrayList<>();
                         JSONArray tenantJsonArray = obj.optJSONArray("tenants");
                         //Iterating over array
@@ -71,22 +61,25 @@ public class LoginPreseneterImpl implements LoginActivityContract.LoginPresenter
                         }
                         //save list of tenants in sharePref
                         sessions.setTenant(tenantModelList);
-                        loginMainView.onSuccessfulLogin();
+                        mainActivityView.showSuccessMessage(respdesc);
 
                     }else {
-                        loginMainView.onFailedLogin(respdesc);
+                      mainActivityView.showErrorMessage(respdesc);
                     }
-                } catch (JSONException e){
+
+
+                }catch (JSONException e){
                     e.printStackTrace();
                 }
-
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                loginMainView.dismissProgress();
-                loginMainView.onFailedLogin(t.getMessage());
+                mainActivityView.dismissProgress();
+                mainActivityView.showErrorMessage(t.toString());
             }
         });
     }
+
+
 }

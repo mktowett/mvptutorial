@@ -10,9 +10,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClientString {
-    public static final String BASE_URL = "https://gatesystem.rongaiws.com/";
-    private static Retrofit retrofit = null;
 
+    public static final String BASE_URL = "https://gatesystem.rongaiws.com/majimaji/";
+    private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -28,14 +28,13 @@ public class ApiClientString {
         builder.retryOnConnectionFailure(true);
         OkHttpClient okHttpClient = builder.build();
 
-        if (retrofit == null) {
+        if (retrofit == null){
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .client(okHttpClient)
                     .build();
         }
-
         return retrofit;
     }
 }

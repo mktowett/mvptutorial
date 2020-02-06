@@ -2,9 +2,10 @@ package com.mktowett.majiapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.SyncStateContract;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mktowett.majiapp.model.TenantModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,22 +87,26 @@ public class Sessions {
         editor.remove(key);
     }
 
-    //set drivers
-    public <T> void setClients(List<T> list) {
+    //set tenants
+    public <T> void setTenant(List<T> list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
-        set(Constants.KEY_CLIENTS, json);
+        set(Constants.KEY_TENANTS, json);
     }
 
-   /* //get trucks in list
-    public List<ClientModel> getClients() {
-        List<ClientModel> OutletModelList;
-        String accountsListString = pref.getString(Constants.KEY_CLIENTS, null);
+    //get tenants
+    public List<TenantModel> getTenant() {
+        List<TenantModel> OutletModelList;
+        String accountsListString = pref.getString(Constants.KEY_TENANTS, null);
         Gson gson = new Gson();
-        OutletModelList = gson.fromJson(accountsListString, new TypeToken<ArrayList<ClientModel>>() {
+        OutletModelList = gson.fromJson(accountsListString, new TypeToken<ArrayList<TenantModel>>() {
         }.getType());
         return OutletModelList;
-    }*/
+    }
+
+    public void getTenatByPosition(int i){
+        getInt(Constants.KEY_TENANTS);
+    }
 
 
     //set userid
@@ -112,6 +117,16 @@ public class Sessions {
     //get userid
     public String getUserId() {
         return getString(Constants.KEY_USERID);
+    }
+
+    //set adminId
+    public void setAdminId(String id) {
+        setString(Constants.KEY_ADMINID, id);
+    }
+
+    //get adminId
+    public String getAdminId() {
+        return getString(Constants.KEY_ADMINID);
     }
 
     //set clientId

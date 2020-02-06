@@ -17,7 +17,6 @@ public class LoginActivityContract {
         void onFailedLogin(String msg);
         void showProgress();
         void dismissProgress();
-        void loadTenantsSpinner();
 
     }
 
