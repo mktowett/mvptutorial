@@ -1,5 +1,7 @@
 package com.mktowett.majiapp.core.core.dashboard;
 
+import android.util.Log;
+
 import com.mktowett.majiapp.model.TenantModel;
 import com.mktowett.majiapp.network.ApiClientString;
 import com.mktowett.majiapp.network.ApiInterface;
@@ -32,9 +34,11 @@ public class MainActivityPresenterImpl implements MainActivityContract.Presenter
         mainActivityView.showProgress();
         ApiInterface apiInterface = ApiClientString.getClient().create(ApiInterface.class);
         Call<String> call = apiInterface.recordMeter(id,userId,meterReading,adminId);
+        Log.d("pointerX","mark"+call);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("callback","resp"+response);
                 mainActivityView.dismissProgress();
                 try{
                     JSONObject obj = new JSONObject(response.body());

@@ -48,6 +48,8 @@ public class LoginPreseneterImpl implements LoginActivityContract.LoginPresenter
                     String respdesc = obj.optString(Constants.KEY_RESPDESC);
 
                     if (respcode.equals("00")){
+                        sessions.clearData(Constants.KEY_TENANTS
+                        );
                         Log.d("dataResponse","res"+response.body());
                         sessions.setUserId(obj.optJSONObject("user_data").optString("USER_ID"));
                         sessions.setAdminId(obj.optJSONObject("user_data").optString("USER_CREATED_BY"));

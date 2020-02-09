@@ -50,6 +50,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityCon
                showValidationErrorMsg();
             }
         });
+
+        etUsername.setText("itadmin");
+        etPassword.setText("itadmin");
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         //Iterating over tenants array
         for (int i=0; i<tenantModelList.size();i++){
             TenantModel tenant = tenantModelList.get(i);
-            tenantList.add(tenant.getMeterNumber());
+            //set name in spinner
+            tenantList.add(tenant.getMeterNumber()+"-"+tenant.getFirstname()+" "+tenant.getSurname());
         }
 
         //set list of tenants in adapter
@@ -140,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void onFormValidation() {
         if(StringUtilities.checkFilledEditText(etCurrentReading,"This is required")){
-            presenter.onSubmitForm(tenantId,sessions.getUserId(),etCurrentReading.getText().toString(),sessions.getAdminId(),sessions);
+            presenter.onSubmitForm(sessions.getUserId(),tenantId,etCurrentReading.getText().toString(),sessions.getAdminId(),sessions);
+            Log.d("sending_data","tenant: "+tenantId+" ||userId: "+sessions.getUserId()+" ||reading: "+etCurrentReading+"adminID: "+sessions.getAdminId());
         }
     }
 }

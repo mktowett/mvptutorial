@@ -19,11 +19,11 @@ public class ApiClientString {
         int KEY_TIMEOUT = 240;
         builder.readTimeout(KEY_TIMEOUT, TimeUnit.SECONDS).connectTimeout(KEY_TIMEOUT, TimeUnit.SECONDS).writeTimeout(KEY_TIMEOUT, TimeUnit.SECONDS);
 
-        if (BuildConfig.DEBUG) {
+       // if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.networkInterceptors().add(httpLoggingInterceptor);
-        }
+      //  }
 
         builder.retryOnConnectionFailure(true);
         OkHttpClient okHttpClient = builder.build();
