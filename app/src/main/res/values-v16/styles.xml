@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.ParentButton" parent="android:style/Widget.Button">
+        <item name="android:fontFamily">@font/titilliumwebregular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_button_rounded</item>
+        <item name="android:layout_height">@dimen/standard_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/standard_padding</item>
+        <item name="android:minHeight">@dimen/standard_height</item>
+        <item name="android:layout_marginTop">@dimen/standard_margin</item>
+    </style>
+</resources>

@@ -71,7 +71,6 @@ public class MainActivityPresenterImpl implements MainActivityContract.Presenter
                       mainActivityView.showErrorMessage(respdesc);
                     }
 
-
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
