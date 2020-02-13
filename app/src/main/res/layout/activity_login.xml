@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:layout_marginRight="40dp"
+    android:layout_marginLeft="40dp"
     android:gravity="center"
     tools:context=".core.core.login.LoginActivity">
 
@@ -15,6 +17,12 @@
         android:orientation="vertical"
         android:layout_margin="20dp"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_transparent"/>
 
     <TextView
         style="@style/FormLabels"
@@ -26,7 +34,7 @@
 
     <TextView
         style="@style/FormLabels"
-        android:text="PASSWORD"/>
+        android:text="Password"/>
 
     <EditText
         style="@style/EditText"
